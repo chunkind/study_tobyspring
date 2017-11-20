@@ -21,7 +21,6 @@ public class UserDaoTest {
 		
 		UserDao dao = context.getBean("userDao", UserDao.class);
 		
-		//new
 		dao.deleteAll();
 		assertThat(dao.getCount(), is(0));
 		
@@ -31,11 +30,8 @@ public class UserDaoTest {
 		user.setPassword("wnstjd88");
 		
 		dao.add(user);
-		//old
-//		System.out.println(user.getId() + " 등록 성공");
-		//new
-		assertThat(dao.getCount(), is(1));
 		
+		System.out.println(user.getId() + " 등록 성공");
 		User user2 = dao.get(user.getId());
 		
 		assertThat(user2.getName(), is(user.getName()));
