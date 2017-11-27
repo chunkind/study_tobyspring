@@ -133,18 +133,20 @@ public class UserDao{
 //	}
 	//new
 	public int getCount() throws SQLException{
-		return this.jdbcTemplate.query(new PreparedStatementCreator() {
-			@Override
-			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-				return con.prepareStatement("SELECT COUNT(*) FROM USERS");
-			}
-		}, new ResultSetExtractor<Integer>() {
-			@Override
-			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
-				rs.next();
-				return rs.getInt(1);
-			}
-		});
+//		return this.jdbcTemplate.query(new PreparedStatementCreator() {
+//			@Override
+//			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+//				return con.prepareStatement("SELECT COUNT(*) FROM USERS");
+//			}
+//		}, new ResultSetExtractor<Integer>() {
+//			@Override
+//			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
+//				rs.next();
+//				return rs.getInt(1);
+//			}
+//		});
+		//new2
+		return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM USERS");
 	}
 	
 }
