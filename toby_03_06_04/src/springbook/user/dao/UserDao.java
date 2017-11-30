@@ -2,6 +2,7 @@ package springbook.user.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -35,6 +36,22 @@ public class UserDao{
 			, new RowMapper<User>() {
 				@Override
 				public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+					User user = new User();
+					user.setId(rs.getString("id"));
+					user.setName(rs.getString("name"));
+					user.setPassword(rs.getString("password"));
+					return user;
+				}
+			});
+	}
+	
+	//new
+	public List<User> getAll(){
+		return this.jdbcTemplate.query("SELECT * FROM USERS ORDER BY ID",
+			new RowMapper<User>() {
+				@Override
+				public User mapRow(ResultSet rs, int rowNum)
+						throws SQLException {
 					User user = new User();
 					user.setId(rs.getString("id"));
 					user.setName(rs.getString("name"));
