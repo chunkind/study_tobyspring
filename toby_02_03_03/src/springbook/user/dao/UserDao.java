@@ -70,7 +70,6 @@ public class UserDao{
 		
 	}
 	
-	//new
 	public void deleteAll() throws SQLException{
 		Connection c = dataSource.getConnection();
 		
@@ -82,7 +81,6 @@ public class UserDao{
 		c.close();
 	}
 	
-	//new
 	public int getCount() throws SQLException{
 		Connection c = dataSource.getConnection();
 		
