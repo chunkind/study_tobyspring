@@ -32,12 +32,18 @@ public class UserDao{
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	public void add(User user) throws ClassNotFoundException, SQLException{
+	//old
+//	public void add(User user) throws ClassNotFoundException, SQLException{
+	//new
+	public void add(User user){
 		this.jdbcTemplate.update("INSERT INTO USERS(ID, NAME, PASSWORD) VALUES(?, ?, ?)", user.getId(), user.getName(), user.getPassword());
 	}
 	
-	
-	public User get(String id) throws ClassNotFoundException, SQLException{
+
+	//old
+//	public User get(String id) throws ClassNotFoundException, SQLException{
+	//new
+	public User get(String id){
 		//old
 //		return this.jdbcTemplate.queryForObject
 //			( "SELECT * FROM USERS WHERE ID = ?"
@@ -75,11 +81,17 @@ public class UserDao{
 		return this.jdbcTemplate.query("SELECT * FROM USERS ORDER BY ID", this.userMapper);
 	}
 	
-	public void deleteAll() throws SQLException{
+	//old
+//	public void deleteAll() throws SQLException{
+	//new
+	public void deleteAll(){
 		this.jdbcTemplate.update("DELETE FROM USERS");
 	}
 	
-	public int getCount() throws SQLException{
+	//old
+//	public int getCount() throws SQLException{
+	//new
+	public int getCount(){
 		return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM USERS");
 	}
 	
