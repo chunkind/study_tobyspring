@@ -7,6 +7,11 @@ import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
 public class UserService {
+	
+	//new
+	public static final int MIN_LOGOUNT_FOR_SILVER = 50;
+	public static final int MIN_RECCOMEND_FOR_GOLD = 30;
+	
 	UserDao userDao;
 	
 	public void setUserDao(UserDao userDao) {
@@ -53,14 +58,24 @@ public class UserService {
 	}
 	
 	//new
-	public boolean canUpgradeLevel(User user) {
+//	public boolean canUpgradeLevel(User user) {
+//		Level currentLevel = user.getLevel();
+//		switch (currentLevel) {
+//		case BASIC: return (user.getLogin() >= 50);
+//		case SILVER: return (user.getRecommend() >= 30);
+//		case GOLD: return false;
+//		//현재 로직에서 다룰 수 없는 레벨이 주어지면 예외를 발생시킨다. 새로운 레벨이 추가되고 로직을 수정하지 않으면 에러가 나서 확인할 수 있다.
+//		default: throw new IllegalArgumentException("Unknown Level: " + currentLevel);
+//		}
+//	}
+	//new2 : 상수 이용.
+	private boolean canUpgradeLevel(User user){
 		Level currentLevel = user.getLevel();
 		switch (currentLevel) {
-		case BASIC: return (user.getLogin() >= 50);
-		case SILVER: return (user.getRecommend() >= 30);
-		case GOLD: return false;
-		//현재 로직에서 다룰 수 없는 레벨이 주어지면 예외를 발생시킨다. 새로운 레벨이 추가되고 로직을 수정하지 않으면 에러가 나서 확인할 수 있다.
-		default: throw new IllegalArgumentException("Unknown Level: " + currentLevel);
+			case BASIC: return (user.getLogin() >= MIN_LOGOUNT_FOR_SILVER);
+			case SILVER: return (user.getRecommend() >= MIN_RECCOMEND_FOR_GOLD);
+			case GOLD: return false;
+			default: throw new IllegalArgumentException("Unknown Level: " + currentLevel);
 		}
 	}
 	

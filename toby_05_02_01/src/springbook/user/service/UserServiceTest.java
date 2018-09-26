@@ -36,13 +36,6 @@ public class UserServiceTest {
 	@Before
 	public void setUp(){
 		users = Arrays.asList(
-			//old 
-//			new User("myGirl01", "박정하", "p1", Level.BASIC, 49, 0), 
-//			new User("myGirl02", "채수빈", "p2", Level.BASIC, 50, 0), 
-//			new User("myGirl03", "한예리", "p3", Level.SILVER, 60, 29), 
-//			new User("myGirl04", "나연", "p4", Level.SILVER, 60, 30), 
-//			new User("myGirl05", "모모", "p5", Level.GOLD, 100, 100) 
-			//new : 상수값 사용.
 			new User("myGirl01", "박정하", "p1", Level.BASIC, MIN_LOGOUNT_FOR_SILVER-1, 0), 
 			new User("myGirl02", "채수빈", "p2", Level.BASIC, MIN_LOGOUNT_FOR_SILVER, 0), 
 			new User("myGirl03", "한예리", "p3", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD-1), 
@@ -65,13 +58,6 @@ public class UserServiceTest {
 		
 		userService.upgradeLevels();
 		
-		//old
-//		checkLevel(users.get(0), Level.BASIC);
-//		checkLevel(users.get(1), Level.SILVER);
-//		checkLevel(users.get(2), Level.SILVER);
-//		checkLevel(users.get(3), Level.GOLD);
-//		checkLevel(users.get(4), Level.GOLD);
-		//new
 		checkLevelUpgraded(users.get(0), false);
 		checkLevelUpgraded(users.get(1), true);
 		checkLevelUpgraded(users.get(2), false);
@@ -80,12 +66,6 @@ public class UserServiceTest {
 		
 	}
 	
-	//old
-//	private void checkLevel(User user, Level expectedLevel){
-//		User userUpdate = userDao.get(user.getId());
-//		assertThat(userUpdate.getLevel(), is(expectedLevel));
-//	}
-	//new
 	private void checkLevelUpgraded(User user, boolean upgraded){
 		User userUpdate = userDao.get(user.getId());
 		if(upgraded){
