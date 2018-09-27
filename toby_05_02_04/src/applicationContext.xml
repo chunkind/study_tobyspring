@@ -4,19 +4,19 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	<!-- mysql -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="url"  value="jdbc:mysql://localhost/springbook" />
 		<property name="username"  value="spring" />
 		<property name="password"  value="book" />
-	</bean>
+	</bean> -->
 	<!-- oracle -->
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
+		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
 		<property name="username"  value="spring" />
 		<property name="password"  value="book" />
-	</bean> -->
+	</bean>
 	
 	<bean id="userDao" class="springbook.user.dao.UserDaoJdbc">
 		<property name="dataSource" ref="dataSource" />
@@ -24,7 +24,16 @@
 	
 	<bean id="userService" class="springbook.user.service.UserService">
 		<property name="userDao" ref="userDao" />
+		<!-- old -->
+		<!-- <property name="dataSource" ref="dataSource" /> -->
+		<!-- new -->
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<!-- new -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	<!-- JTA : 이것은 어떻게 쓰는 것인가.. -->
+	<!-- <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager" /> -->
 </beans>
