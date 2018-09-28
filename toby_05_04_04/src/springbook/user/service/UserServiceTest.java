@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import static springbook.user.service.UserService.MIN_LOGOUNT_FOR_SILVER;
 import static springbook.user.service.UserService.MIN_RECCOMEND_FOR_GOLD;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +17,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -38,7 +42,6 @@ public class UserServiceTest {
 	@Autowired
 	PlatformTransactionManager transactionManager;
 	
-	//new
 	@Autowired
 	MailSender mailSender;
 	
@@ -55,6 +58,26 @@ public class UserServiceTest {
 		}
 	}
 	static class TestUserServiceException extends RuntimeException{}
+	
+	//new
+	static class MockMailSender implements MailSender{
+		private List<String> requests = new ArrayList<String>();
+		
+		public List<String> getRequests(){
+			return requests;
+		}
+		
+		@Override
+		public void send(SimpleMailMessage mailMessage) throws MailException {
+			requests.add(mailMessage.getTo()[0]);
+		}
+
+		@Override
+		public void send(SimpleMailMessage[] mailMessage) throws MailException {
+			
+		}
+		
+	}
 	
 	@Before
 	public void setUp(){
@@ -73,11 +96,17 @@ public class UserServiceTest {
 	}
 	
 	@Test
+	//new
+	@DirtiesContext //컨텍스트의 DI설정을 변경하는 테스트라는 것을 알려준다.
 	public void upgradeLevels() throws Exception{
 		userDao.deleteAll();
 		for(User user : users){
 			userDao.add(user);
 		}
+		
+		//new
+		MockMailSender mockMailSender = new MockMailSender();
+		userService.setMailSender(mockMailSender);
 		
 		userService.upgradeLevels();
 		
@@ -86,6 +115,12 @@ public class UserServiceTest {
 		checkLevelUpgraded(users.get(2), false);
 		checkLevelUpgraded(users.get(3), true);
 		checkLevelUpgraded(users.get(4), false);
+		
+		//new
+		List<String> request = mockMailSender.getRequests();
+		assertThat(request.size(), is(2));
+		assertThat(request.get(0), is(users.get(1).getEmail()));
+		assertThat(request.get(1), is(users.get(3).getEmail()));
 		
 	}
 	
@@ -124,7 +159,6 @@ public class UserServiceTest {
 		UserService testUserService = new TestUserService(users.get(3).getId());
 		testUserService.setUserDao(this.userDao);
 		testUserService.setTransactionManager(transactionManager);
-		//new
 		testUserService.setMailSender(mailSender);
 		
 		userDao.deleteAll();

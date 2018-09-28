@@ -37,7 +37,6 @@ public class UserService {
 	
 	UserDao userDao;
 	
-	//new
 	private MailSender mailSender;
 	
 	private PlatformTransactionManager transactionManager;
@@ -47,7 +46,6 @@ public class UserService {
 		this.userDao = userDao;
 	}
 	
-	//new
 	public void setMailSender(MailSender mailSender){
 		this.mailSender = mailSender;
 	}
@@ -87,7 +85,6 @@ public class UserService {
 	protected void upgradeLevel(User user) {
 		user.upgradeLevel();
 		userDao.update(user);
-		//new : mail 보내는 로직 추가
 		sendUpgradeEMail(user);
 	}
 	
@@ -98,41 +95,6 @@ public class UserService {
 		userDao.add(user);
 	}
 	
-	//old
-//	private void sendUpgradeEMail(User user) {
-//		Properties props = new Properties();
-//		props.put("mail.smtp.host", "mail.ksug.org");
-//		Session s = Session.getInstance(props, null);
-//		
-//		MimeMessage message = new MimeMessage(s);
-//		try{
-//			message.setFrom(new InternetAddress("useradmin@ksug.org"));
-//			message.addRecipient(Message.RecipientType.TO
-//					, new InternetAddress(user.getEmail()));
-//			message.setSubject("Upgrade 안내");
-//			message.setText("사용자님의 등급이 " + user.getLevel().name() + "로 업그레이드 되었습니다.");
-//			
-//			Transport.send(message);
-//		}catch(AddressException e){
-//			throw new RuntimeException(e);
-//		}catch(MessagingException e){
-//			throw new RuntimeException(e);
-//		}
-//	}
-	//new : 추상화
-//	private void sendUpgradeEMail(User user) {
-//		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//		mailSender.setHost("mail.server.com");
-//		
-//		SimpleMailMessage mailMessage = new SimpleMailMessage();
-//		mailMessage.setTo(user.getEmail());
-//		mailMessage.setFrom("useradmin@ksug.org");
-//		mailMessage.setSubject("Upgrade 안내");
-//		mailMessage.setText("사용자님의 등급이 " + user.getLevel().name() + "로 업그레이드 되었습니다.");
-//		
-//		mailSender.send(mailMessage);
-//	}
-	//new2 : 스프링 DI 적용
 	private void sendUpgradeEMail(User user) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(user.getEmail());
