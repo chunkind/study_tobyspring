@@ -87,7 +87,6 @@ public class UserService {
 		userDao.add(user);
 	}
 	
-	//new : email 보내는 메서드
 	private void sendUpgradeEMail(User user) {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "mail.ksug.org");
