@@ -42,7 +42,7 @@ public class UserDaoJdbc implements UserDao{
 	public void add(User user){
 		//old
 //		this.jdbcTemplate.update("INSERT INTO USERS(ID, NAME, PASSWORD) VALUES(?, ?, ?)", user.getId(), user.getName(), user.getPassword());
-		//new : 필드 추가.
+		//new
 		this.jdbcTemplate.update("INSERT INTO USERS (id, name, password, lv, login, recommend) VALUES(?, ?, ?, ?, ?, ?)"
 				, user.getId(), user.getName(), user.getPassword()
 				, user.getLevel().intValue(), user.getLogin(), user.getRecommend());

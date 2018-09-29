@@ -1,9 +1,9 @@
 package springbook.user.domain;
 
-//new : ÇĞ½ÀÅ×½ºÆ®1.
+//new : í•™ìŠµí…ŒìŠ¤íŠ¸1.
 //public enum Level {
 //	BASIC(), SILVER(), GOLD();
-//	// enum ÇĞ½À Å×½ºÆ®.
+//	// enum í•™ìŠµ í…ŒìŠ¤íŠ¸.
 //	public static void main(String[] args) {
 //		Level e1 = Level.BASIC;
 //		Level e2 = Level.SILVER;
@@ -13,7 +13,7 @@ package springbook.user.domain;
 //		System.out.println(Level.GOLD);
 //	}
 //}
-//new : ÀÌ´½ Ãß°¡.
+//new : ì´ëŠ„ ì¶”ê°€.
 public enum Level{
 	BASIC(1), SILVER(2), GOLD(3);
 	

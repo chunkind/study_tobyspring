@@ -6,7 +6,7 @@ import springbook.user.dao.UserDao;
 import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
-//new : ¼­ºñ½º Ãß°¡.
+//new : ì„œë¹„ìŠ¤ ì¶”ê°€.
 public class UserService {
 	UserDao userDao;
 	
@@ -19,17 +19,17 @@ public class UserService {
 		for(User user : users){
 			Boolean changed = null;
 			
-			//BASIC ·¡¹ë ¾÷±×·¹ÀÌµå -> SILVER·Î º¯°æ.
+			//BASIC ëž˜ë°¸ ì—…ê·¸ë ˆì´ë“œ -> SILVERë¡œ ë³€ê²½.
 			if(user.getLevel() == Level.BASIC && user.getLogin() >= 50){
 				user.setLevel(Level.SILVER);
 				changed = true;
 			}
-			//SILVER ·¡¹ë ¾÷±×·¹ÀÌµå  -> GOLD·Î º¯°æ.
+			//SILVER ëž˜ë°¸ ì—…ê·¸ë ˆì´ë“œ  -> GOLDë¡œ ë³€ê²½.
 			else if(user.getLevel() == Level.SILVER && user.getRecommend() >= 30){
 				user.setLevel(Level.GOLD);
 				changed = true;
 			}
-			//GOLD ·¡¹ë ¾÷±×·¹ÀÌµå -> º¯°æÇÏÁö ¾Ê´Â´Ù.
+			//GOLD ëž˜ë°¸ ì—…ê·¸ë ˆì´ë“œ -> ë³€ê²½í•˜ì§€ ì•ŠëŠ”ë‹¤.
 			else if(user.getLevel() == Level.GOLD){
 				changed = false;
 			}

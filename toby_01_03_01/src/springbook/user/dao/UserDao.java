@@ -75,17 +75,17 @@ public class UserDao{
 		
 		User user = new User();
 		user.setId("chunkind");
-		user.setName("±èÁØ¼º");
+		user.setName("ê¹€ì¤€ì„±");
 		user.setPassword("wnstjd88");
 		
 		dao.add(user);
 		
-		System.out.println(user.getId() + " µî·Ï ¼º°ø");
+		System.out.println(user.getId() + " ë“±ë¡ ì„±ê³µ");
 		User user2 = dao.get(user.getId());
 		
 		System.out.println(user2.getName());
 		System.out.println(user2.getPassword());
-		System.out.println(user2.getId() + " Á¶È¸ ¼º°ø");
+		System.out.println(user2.getId() + " ì¡°íšŒ ì„±ê³µ");
 		
 	}
 }
@@ -95,7 +95,7 @@ public class UserDao{
 //
 //	@Override
 //	public Connection getConnection() throws ClassNotFoundException, SQLException {
-//		//N »ç DB connection ÄÚµå
+//		//N ì‚¬ DB connection ì½”ë“œ
 //		return null;
 //	}
 //	
@@ -106,7 +106,7 @@ public class UserDao{
 //
 //	@Override
 //	public Connection getConnection() throws ClassNotFoundException, SQLException {
-//		//D »ç DB connection ÄÚµå
+//		//D ì‚¬ DB connection ì½”ë“œ
 //		return null;
 //	}
 //	

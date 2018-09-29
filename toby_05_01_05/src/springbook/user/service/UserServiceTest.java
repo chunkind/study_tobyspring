@@ -37,17 +37,17 @@ public class UserServiceTest {
 	public void setUp(){
 		users = Arrays.asList(
 			//old 
-//			new User("myGirl01", "¹ÚÁ¤ÇÏ", "p1", Level.BASIC, 49, 0), 
-//			new User("myGirl02", "Ã¤¼öºó", "p2", Level.BASIC, 50, 0), 
-//			new User("myGirl03", "ÇÑ¿¹¸®", "p3", Level.SILVER, 60, 29), 
-//			new User("myGirl04", "³ª¿¬", "p4", Level.SILVER, 60, 30), 
-//			new User("myGirl05", "¸ğ¸ğ", "p5", Level.GOLD, 100, 100) 
-			//new : »ó¼ö°ª »ç¿ë.
-			new User("myGirl01", "¹ÚÁ¤ÇÏ", "p1", Level.BASIC, MIN_LOGOUNT_FOR_SILVER-1, 0), 
-			new User("myGirl02", "Ã¤¼öºó", "p2", Level.BASIC, MIN_LOGOUNT_FOR_SILVER, 0), 
-			new User("myGirl03", "ÇÑ¿¹¸®", "p3", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD-1), 
-			new User("myGirl04", "³ª¿¬", "p4", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD), 
-			new User("myGirl05", "¸ğ¸ğ", "p5", Level.GOLD, 100, Integer.MAX_VALUE) 
+//			new User("myGirl01", "ë°•ì •í•˜", "p1", Level.BASIC, 49, 0), 
+//			new User("myGirl02", "ì±„ìˆ˜ë¹ˆ", "p2", Level.BASIC, 50, 0), 
+//			new User("myGirl03", "í•œì˜ˆë¦¬", "p3", Level.SILVER, 60, 29), 
+//			new User("myGirl04", "ë‚˜ì—°", "p4", Level.SILVER, 60, 30), 
+//			new User("myGirl05", "ëª¨ëª¨", "p5", Level.GOLD, 100, 100) 
+			//new : ìƒìˆ˜ê°’ ì‚¬ìš©.
+			new User("myGirl01", "ë°•ì •í•˜", "p1", Level.BASIC, MIN_LOGOUNT_FOR_SILVER-1, 0), 
+			new User("myGirl02", "ì±„ìˆ˜ë¹ˆ", "p2", Level.BASIC, MIN_LOGOUNT_FOR_SILVER, 0), 
+			new User("myGirl03", "í•œì˜ˆë¦¬", "p3", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD-1), 
+			new User("myGirl04", "ë‚˜ì—°", "p4", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD), 
+			new User("myGirl05", "ëª¨ëª¨", "p5", Level.GOLD, 100, Integer.MAX_VALUE) 
 		);
 	}
 	
@@ -100,8 +100,8 @@ public class UserServiceTest {
 	public void add(){
 		userDao.deleteAll();
 		
-		User userWithLevel = users.get(4); //GOLD ·¹º§
-		User userWithoutLevel = users.get(0); //·¹º§ÀÌ ºñ¾îÀÖ´Â »ç¿ëÀÚ
+		User userWithLevel = users.get(4); //GOLD ë ˆë²¨
+		User userWithoutLevel = users.get(0); //ë ˆë²¨ì´ ë¹„ì–´ìˆëŠ” ì‚¬ìš©ì
 		userWithoutLevel.setLevel(null);
 		
 		userService.add(userWithLevel);

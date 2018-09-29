@@ -38,9 +38,9 @@ public class UserDaoTest {
 	
 	@Before
 	public void setUp(){
-		this.user1 = new User("myGirl1", "¹ÚÁ¤ÇÏ", "girl1", Level.BASIC, 1, 0);
-		this.user2 = new User("myGirl2", "Ã¤¼öºó", "girl2", Level.SILVER, 55, 10);
-		this.user3 = new User("myGirl3", "ÇÑ¿¹¸®", "girl3", Level.GOLD, 100, 40);
+		this.user1 = new User("myGirl1", "ë°•ì •í•˜", "girl1", Level.BASIC, 1, 0);
+		this.user2 = new User("myGirl2", "ì±„ìˆ˜ë¹ˆ", "girl2", Level.SILVER, 55, 10);
+		this.user3 = new User("myGirl3", "í•œì˜ˆë¦¬", "girl3", Level.GOLD, 100, 40);
 	}
 	
 	@Test
@@ -137,36 +137,27 @@ public class UserDaoTest {
 	@Test
 	public void update() {
 		dao.deleteAll();
-		dao.add(user1); // ¼öÁ¤ÇÒ »ç¿ëÀÚ
-		dao.add(user2); // ¼öÁ¤ÇÏÁö ¾ÊÀ» »ç¿ëÀÚ
+		dao.add(user1); // ìˆ˜ì •í•  ì‚¬ìš©ì
+		dao.add(user2); // ìˆ˜ì •í•˜ì§€ ì•Šì„ ì‚¬ìš©ì
 		
-		user1.setName("¹ÚºÎ¸®");
+		user1.setName("ë°•ë¶€ë¦¬");
 		user1.setPassword("qnfl");
 		user1.setLevel(Level.GOLD);
 		user1.setLogin(1000);
 		user1.setRecommend(999);
 		dao.update(user1);
 		
-		//¼öÁ¤ÇÒ »ç¿ëÀÚ °ËÁõ
+		//ìˆ˜ì •í•  ì‚¬ìš©ì ê²€ì¦
 		User user1update = dao.get(user1.getId());
 		checkSameUser(user1, user1update);
 		
-		//¼öÁ¤ÇÏÁö ¾ÊÀ» »ç¿ëÀÚ °ËÁõ
+		//ìˆ˜ì •í•˜ì§€ ì•Šì„ ì‚¬ìš©ì ê²€ì¦
 		User user2update = dao.get(user2.getId());
 		checkSameUser(user2, user2update);
 		
 	}
 	
 }
-
-
-
-
-
-
-
-
-
 
 
 

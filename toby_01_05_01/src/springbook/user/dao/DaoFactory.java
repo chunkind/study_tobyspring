@@ -5,13 +5,13 @@ import org.springframework.context.annotation.Configuration;
 
 //old
 //public class DaoFactory {
-//new : ¾ÖÇÃ¸®ÄÉÀÌ¼Ç ÄÁÅØ½ºÆ® ¶Ç´Â ºó ÆÑÅä¸®°¡ »ç¿ëÇÒ ¼³Á¤Á¤º¸¶ó´Â Ç¥½Ã.
+//new : ì• í”Œë¦¬ì¼€ì´ì…˜ ì»¨í…ìŠ¤íŠ¸ ë˜ëŠ” ë¹ˆ íŒ©í† ë¦¬ê°€ ì‚¬ìš©í•  ì„¤ì •ì •ë³´ë¼ëŠ” í‘œì‹œ.
 @Configuration
 public class DaoFactory{
 	
 	//old
 //	public UserDao userDao() {
-	//new : ¿ÀºêÁ§Æ® »ı¼ºÀ» ´ã´çÇÏ´Â ioC¿ë ¸Ş¼Òµå¶ó´Â Ç¥½Ã.
+	//new : ì˜¤ë¸Œì íŠ¸ ìƒì„±ì„ ë‹´ë‹¹í•˜ëŠ” ioCìš© ë©”ì†Œë“œë¼ëŠ” í‘œì‹œ.
 	@Bean
 	public UserDao userDao() {
 		return new UserDao(connectionMaker());

@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import springbook.user.domain.User;
 
-//new : UserDao -> UserDaoJdbc ·Î ÀÎÅÍÆäÀÌ½º¸¦ µÎ°í ±¸»óÅ¬·¡½º·Î ºĞ¸®ÇÏ¿´´Ù.
+//new : UserDao -> UserDaoJdbc ë¡œ ì¸í„°í˜ì´ìŠ¤ë¥¼ ë‘ê³  êµ¬ìƒí´ë˜ìŠ¤ë¡œ ë¶„ë¦¬í•˜ì˜€ë‹¤.
 public class UserDaoJdbc implements UserDao{
 
 	private JdbcTemplate jdbcTemplate;

@@ -19,7 +19,7 @@ public class User {
 //		this.name = name;
 //		this.password = password;
 //	}
-	//new : »ý¼ºÀÚ Ãß°¡.
+	//new : ì»¬ëŸ¼ ì¶”ê°€.
 	public User(String id, String name, String password, Level level, 
 		int login, int recommend) {
 		this.id = id;
@@ -49,7 +49,7 @@ public class User {
 		this.password = password;
 	}
 
-	//new : get,set ter Ãß°¡.
+	//new : get,set ter ì¶”ê°€.
 	public Level getLevel() {
 		return level;
 	}

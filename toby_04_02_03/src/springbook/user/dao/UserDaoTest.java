@@ -39,9 +39,9 @@ public class UserDaoTest {
 	
 	@Before
 	public void setUp(){
-		this.user1 = new User("myGirl1", "¹ÚÁ¤ÇÏ", "girl1");
-		this.user2 = new User("myGirl2", "Ã¤¼öºó", "girl2");
-		this.user3 = new User("myGirl3", "ÇÑ¿¹¸®", "girl3");
+		this.user1 = new User("myGirl1", "ë°•ì •í•˜", "girl1");
+		this.user2 = new User("myGirl2", "ì±„ìˆ˜ë¹ˆ", "girl2");
+		this.user3 = new User("myGirl3", "í•œì˜ˆë¦¬", "girl3");
 	}
 	
 	@Test
@@ -123,7 +123,7 @@ public class UserDaoTest {
 		assertThat(user1.getPassword(), is(user2.getPassword()));
 	}
 	
-	//new : ¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	//new : ì•„ì´ë”” ì¤‘ë³µ ì²´í¬.
 //	@Test(expected=DataAccessException.class)
 	@Test(expected=DuplicateKeyException.class)
 	public void duplciateKey() {
@@ -133,7 +133,7 @@ public class UserDaoTest {
 		dao.add(user1);
 	}
 	
-	//new : ¿¹¿Ü ÀüÈ¯ Å×½ºÆ® ÄÚµå
+	//new : ì˜ˆì™¸ ì „í™˜ í…ŒìŠ¤íŠ¸ ì½”ë“œ.
 	@Test
 	public void sqlExceptionTranslate() {
 		

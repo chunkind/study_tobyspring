@@ -32,7 +32,7 @@ package springbook.user.domain;
 //new
 public enum Level{
 	
-	//ÀÌ´½ ¼±¾ğ¿¡ DB¿¡ ÀúÀåÇÒ °ª°ú ÇÔ²² ´ÙÀ½ ´Ü°èÀÇ ·¹º§ Á¤º¸µµ Ãß°¡ÇÑ´Ù.
+	//ì´ëŠ„ ì„ ì–¸ì— DBì— ì €ì¥í•  ê°’ê³¼ í•¨ê»˜ ë‹¤ìŒ ë‹¨ê³„ì˜ ë ˆë²¨ ì •ë³´ë„ ì¶”ê°€í•œë‹¤.
 	GOLD(3, null), SILVER(2, GOLD), BASIC(1, SILVER);
 	
 	private final int value;

@@ -31,9 +31,9 @@ public class UserDaoTest {
 	
 	@Before
 	public void setUp(){
-		this.user1 = new User("myGirl1", "¹ÚÁ¤ÇÏ", "girl1");
-		this.user2 = new User("myGirl2", "Ã¤¼öºó", "girl2");
-		this.user3 = new User("myGirl3", "ÇÑ¿¹¸®", "girl3");
+		this.user1 = new User("myGirl1", "ë°•ì •í•˜", "girl1");
+		this.user2 = new User("myGirl2", "ì±„ìˆ˜ë¹ˆ", "girl2");
+		this.user3 = new User("myGirl3", "í•œì˜ˆë¦¬", "girl3");
 	}
 	
 	@Test

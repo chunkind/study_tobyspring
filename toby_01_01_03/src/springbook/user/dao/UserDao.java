@@ -50,23 +50,23 @@ public class UserDao {
 	}
 	
 	
-	//new : self Å×½ºÆ®¿ë main
+	//new : self í…ŒìŠ¤íŠ¸ìš© main
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		UserDao dao = new UserDao();
 		
 		User user = new User();
 		user.setId("chunkind");
-		user.setName("±èÁØ¼º");
+		user.setName("ê¹€ì¤€ì„±");
 		user.setPassword("wnstjd88");
 		
 		dao.add(user);
 		
-		System.out.println(user.getId() + " µî·Ï ¼º°ø");
+		System.out.println(user.getId() + " ë“±ë¡ ì„±ê³µ");
 		User user2 = dao.get(user.getId());
 		
 		System.out.println(user2.getName());
 		System.out.println(user2.getPassword());
-		System.out.println(user2.getId() + " Á¶È¸ ¼º°ø");
+		System.out.println(user2.getId() + " ì¡°íšŒ ì„±ê³µ");
 		
 	}
 }

@@ -24,17 +24,17 @@ public class UserService {
 //		for(User user : users){
 //			Boolean changed = null;
 //			
-//			//BASIC ·¡¹ë ¾÷±×·¹ÀÌµå -> SILVER·Î º¯°æ.
+//			//BASIC ë˜ë°¸ ì—…ê·¸ë ˆì´ë“œ -> SILVERë¡œ ë³€ê²½.
 //			if(user.getLevel() == Level.BASIC && user.getLogin() >= 50){
 //				user.setLevel(Level.SILVER);
 //				changed = true;
 //			}
-//			//SILVER ·¡¹ë ¾÷±×·¹ÀÌµå  -> GOLD·Î º¯°æ.
+//			//SILVER ë˜ë°¸ ì—…ê·¸ë ˆì´ë“œ  -> GOLDë¡œ ë³€ê²½.
 //			else if(user.getLevel() == Level.SILVER && user.getRecommend() >= 30){
 //				user.setLevel(Level.GOLD);
 //				changed = true;
 //			}
-//			//GOLD ·¡¹ë ¾÷±×·¹ÀÌµå -> º¯°æÇÏÁö ¾Ê´Â´Ù.
+//			//GOLD ë˜ë°¸ ì—…ê·¸ë ˆì´ë“œ -> ë³€ê²½í•˜ì§€ ì•ŠëŠ”ë‹¤.
 //			else if(user.getLevel() == Level.GOLD){
 //				changed = false;
 //			}
@@ -64,11 +64,11 @@ public class UserService {
 //		case BASIC: return (user.getLogin() >= 50);
 //		case SILVER: return (user.getRecommend() >= 30);
 //		case GOLD: return false;
-//		//ÇöÀç ·ÎÁ÷¿¡¼­ ´Ù·ê ¼ö ¾ø´Â ·¹º§ÀÌ ÁÖ¾îÁö¸é ¿¹¿Ü¸¦ ¹ß»ı½ÃÅ²´Ù. »õ·Î¿î ·¹º§ÀÌ Ãß°¡µÇ°í ·ÎÁ÷À» ¼öÁ¤ÇÏÁö ¾ÊÀ¸¸é ¿¡·¯°¡ ³ª¼­ È®ÀÎÇÒ ¼ö ÀÖ´Ù.
+//		//í˜„ì¬ ë¡œì§ì—ì„œ ë‹¤ë£° ìˆ˜ ì—†ëŠ” ë ˆë²¨ì´ ì£¼ì–´ì§€ë©´ ì˜ˆì™¸ë¥¼ ë°œìƒì‹œí‚¨ë‹¤. ìƒˆë¡œìš´ ë ˆë²¨ì´ ì¶”ê°€ë˜ê³  ë¡œì§ì„ ìˆ˜ì •í•˜ì§€ ì•Šìœ¼ë©´ ì—ëŸ¬ê°€ ë‚˜ì„œ í™•ì¸í•  ìˆ˜ ìˆë‹¤.
 //		default: throw new IllegalArgumentException("Unknown Level: " + currentLevel);
 //		}
 //	}
-	//new2 : »ó¼ö ÀÌ¿ë.
+	//new2 : ìƒìˆ˜ ì´ìš©.
 	private boolean canUpgradeLevel(User user){
 		Level currentLevel = user.getLevel();
 		switch (currentLevel) {
@@ -85,7 +85,7 @@ public class UserService {
 //		else if(user.getLevel() == Level.SILVER) user.setLevel(Level.GOLD);
 //		userDao.update(user);
 //	}
-	//new : User °´Ã¼°¡ Á÷Á¢ ¾÷±×·¹ÀÌµå ±â´ÉÀ» ÇØÁØ´Ù.
+	//new : User ê°ì²´ê°€ ì§ì ‘ ì—…ê·¸ë ˆì´ë“œ ê¸°ëŠ¥ì„ í•´ì¤€ë‹¤.
 	private void upgradeLevel(User user) {
 		user.upgradeLevel();
 		userDao.update(user);

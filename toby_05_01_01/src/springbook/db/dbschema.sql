@@ -5,7 +5,7 @@ create table users(
 );
 
 
---new ÄÃ·³ Ãß°¡.
+--new ì¶”ê°€.
 alter table USERS add(LV INTEGER);
 alter table USERS add(LOGIN INTEGER);
 alter table USERS add(RECOMMEND INTEGER);

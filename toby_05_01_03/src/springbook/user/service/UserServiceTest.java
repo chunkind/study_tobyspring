@@ -18,7 +18,7 @@ import springbook.user.dao.UserDao;
 import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
-//new : ¼­ºñ½º Å×½ºÆ®ÄÚµå Ãß°¡.
+//new : ì„œë¹„ìŠ¤ í…ŒìŠ¤íŠ¸ì½”ë“œ ì¶”ê°€.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="/applicationContext.xml")
 public class UserServiceTest {
@@ -34,11 +34,11 @@ public class UserServiceTest {
 	@Before
 	public void setUp(){
 		users = Arrays.asList(
-			new User("myGirl01", "¹ÚÁ¤ÇÏ", "p1", Level.BASIC, 49, 0), 
-			new User("myGirl02", "Ã¤¼öºó", "p2", Level.BASIC, 50, 0), 
-			new User("myGirl03", "ÇÑ¿¹¸®", "p3", Level.SILVER, 60, 29), 
-			new User("myGirl04", "³ª¿¬", "p4", Level.SILVER, 60, 30), 
-			new User("myGirl05", "¸ð¸ð", "p5", Level.GOLD, 100, 100) 
+			new User("myGirl01", "ë°•ì •í•˜", "p1", Level.BASIC, 49, 0), 
+			new User("myGirl02", "ì±„ìˆ˜ë¹ˆ", "p2", Level.BASIC, 50, 0), 
+			new User("myGirl03", "í•œì˜ˆë¦¬", "p3", Level.SILVER, 60, 29), 
+			new User("myGirl04", "ë‚˜ì—°", "p4", Level.SILVER, 60, 30), 
+			new User("myGirl05", "ëª¨ëª¨", "p5", Level.GOLD, 100, 100) 
 		);
 	}
 	

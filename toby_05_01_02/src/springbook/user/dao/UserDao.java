@@ -10,6 +10,6 @@ public interface UserDao{
 	List<User> getAll();
 	void deleteAll();
 	int getCount();
-	//new : ¼öÁ¤ Ãß°¡
+	//new : ë©”ì„œë“œ ì¶”ê°€.
 	void update(User user);
 }

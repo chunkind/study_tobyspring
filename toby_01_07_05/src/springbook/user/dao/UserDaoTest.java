@@ -14,14 +14,14 @@ public class UserDaoTest {
 		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
 		UserDao dao = context.getBean("userDao", UserDao.class);
 		
-		//½Ì±ÛÅæ Å×½ºÆ®
+		//ì‹±ê¸€í†¤ í…ŒìŠ¤íŠ¸
 		DaoFactory factory = new DaoFactory();
 		UserDao dao1 = factory.userDao();
 		UserDao dao2 = factory.userDao();
 		System.out.println(dao1);
 		System.out.println(dao2);
 		
-		//½Ì±ÛÅæ Å×½ºÆ®
+		//ì‹±ê¸€í†¤ í…ŒìŠ¤íŠ¸
 		UserDao dao3 = context.getBean("userDao", UserDao.class);
 		UserDao dao4 = context.getBean("userDao", UserDao.class);
 		System.out.println(dao3);
@@ -30,17 +30,17 @@ public class UserDaoTest {
 		
 		User user = new User();
 		user.setId("chunkind");
-		user.setName("±èÁØ¼º");
+		user.setName("ê¹€ì¤€ì„±");
 		user.setPassword("wnstjd88");
 		
 		dao.add(user);
 		
-		System.out.println(user.getId() + " µî·Ï ¼º°ø");
+		System.out.println(user.getId() + " ë“±ë¡ ì„±ê³µ");
 		User user2 = dao.get(user.getId());
 		
 		System.out.println(user2.getName());
 		System.out.println(user2.getPassword());
-		System.out.println(user2.getId() + " Á¶È¸ ¼º°ø");
+		System.out.println(user2.getId() + " ì¡°íšŒ ì„±ê³µ");
 	}
 	
 }

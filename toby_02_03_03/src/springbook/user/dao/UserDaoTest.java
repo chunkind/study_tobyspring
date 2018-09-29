@@ -28,18 +28,18 @@ public class UserDaoTest {
 		//old
 //		User user = new User();
 //		user.setId("chunkind");
-//		user.setName("±èÁØ¼º");
+//		user.setName("ê¹€ì¤€ì„±");
 //		user.setPassword("wnstjd88");
 		//new
-		User user1 = new User("chunkind", "±èÁØ¼º", "wnstjd88");
-		User user2 = new User("momo12", "¹ÚÁ¤ÇÏ", "wjdgk93");
+		User user1 = new User("chunkind", "ê¹€ì¤€ì„±", "wnstjd88");
+		User user2 = new User("momo12", "ë°•ì •í•˜", "wjdgk93");
 		
 		dao.add(user1);
 		assertThat(dao.getCount(), is(1));
 		dao.add(user2);
 		assertThat(dao.getCount(), is(2));
 		//old
-//		System.out.println(user1.getId() + " µî·Ï ¼º°ø");
+//		System.out.println(user1.getId() + " ë“±ë¡ ì„±ê³µ");
 		//new
 		
 		//new
@@ -58,9 +58,9 @@ public class UserDaoTest {
 		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
 		
 		UserDao dao = context.getBean("userDao", UserDao.class);
-		User user1 = new User("momo02", "¹ÚÁ¤ÇÏ", "wjdgk93");
-		User user2 = new User("ksb3145", "±è»õº½", "toqha91");
-		User user3 = new User("minjea899", "ÃÖ¹ÎÀç", "alswo89");
+		User user1 = new User("momo02", "ë°•ì •í•˜", "wjdgk93");
+		User user2 = new User("ksb3145", "ê¹€ìƒˆë´„", "toqha91");
+		User user3 = new User("minjea899", "ìµœë¯¼ì¬", "alswo89");
 		
 		dao.deleteAll();
 		assertThat(dao.getCount(), is(0));

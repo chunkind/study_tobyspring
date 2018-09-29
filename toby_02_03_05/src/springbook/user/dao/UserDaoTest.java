@@ -26,9 +26,9 @@ public class UserDaoTest {
 	public void setUp(){
 		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
 		this.dao = context.getBean("userDao", UserDao.class);
-		this.user1 = new User("myGirl1", "¹ÚÁ¤ÇÏ", "girl1");
-		this.user2 = new User("myGirl2", "Ã¤¼öºó", "girl2");
-		this.user3 = new User("myGirl3", "ÇÑ¿¹¸®", "girl3");
+		this.user1 = new User("myGirl1", "ë°•ì •í•˜", "girl1");
+		this.user2 = new User("myGirl2", "ì±„ìˆ˜ë¹ˆ", "girl2");
+		this.user3 = new User("myGirl3", "í•œì˜ˆë¦¬", "girl3");
 	}
 	
 	@Test
@@ -42,8 +42,8 @@ public class UserDaoTest {
 		assertThat(dao.getCount(), is(0));
 		
 		//old
-//		User user1 = new User("chunkind", "±èÁØ¼º", "wnstjd88");
-//		User user2 = new User("momo12", "¹ÚÁ¤ÇÏ", "wjdgk93");
+//		User user1 = new User("chunkind", "ê¹€ì¤€ì„±", "wnstjd88");
+//		User user2 = new User("momo12", "ë°•ì •í•˜", "wjdgk93");
 		
 		dao.add(this.user1);
 		assertThat(dao.getCount(), is(1));
@@ -64,9 +64,9 @@ public class UserDaoTest {
 //		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
 //		UserDao dao = context.getBean("userDao", UserDao.class);
 		
-//		User user1 = new User("momo02", "¹ÚÁ¤ÇÏ", "wjdgk93");
-//		User user2 = new User("ksb3145", "±è»õº½", "toqha91");
-//		User user3 = new User("minjea899", "ÃÖ¹ÎÀç", "alswo89");
+//		User user1 = new User("momo02", "ë°•ì •í•˜", "wjdgk93");
+//		User user2 = new User("ksb3145", "ê¹€ìƒˆë´„", "toqha91");
+//		User user3 = new User("minjea899", "ìµœë¯¼ìž¬", "alswo89");
 		
 		dao.deleteAll();
 		assertThat(dao.getCount(), is(0));

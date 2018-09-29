@@ -55,7 +55,7 @@ import springbook.user.domain.User;
 	}
 	
 }*/
-//new : ÀÎÅÍÆäÀÌ½º·Î ºĞ¸®.
+//new : ì¸í„°í˜ì´ìŠ¤ë¡œ ë¶„ë¦¬.
 public interface UserDao{
 	void add(User user);
 	User get(String id);

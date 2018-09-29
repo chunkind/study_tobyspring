@@ -10,7 +10,7 @@ import springbook.user.domain.User;
 
 public class UserDao {
 
-	//new : Áßº¹µÈ ÄÚµå¸¦ µ¶¸³ÀûÀÎ ¸Ş¼Òµå·Î ¸¸µé¾î¼­ Áßº¹À» Á¦°Å Çß´Ù.
+	//new : ì¤‘ë³µëœ ì½”ë“œë¥¼ ë…ë¦½ì ì¸ ë©”ì†Œë“œë¡œ ë§Œë“¤ì–´ì„œ ì¤‘ë³µì„ ì œê±° í–ˆë‹¤.
 	private Connection getConnection() throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook", "spring", "book");
@@ -70,17 +70,17 @@ public class UserDao {
 		
 		User user = new User();
 		user.setId("chunkind");
-		user.setName("±èÁØ¼º");
+		user.setName("ê¹€ì¤€ì„±");
 		user.setPassword("wnstjd88");
 		
 		dao.add(user);
 		
-		System.out.println(user.getId() + " µî·Ï ¼º°ø");
+		System.out.println(user.getId() + " ë“±ë¡ ì„±ê³µ");
 		User user2 = dao.get(user.getId());
 		
 		System.out.println(user2.getName());
 		System.out.println(user2.getPassword());
-		System.out.println(user2.getId() + " Á¶È¸ ¼º°ø");
+		System.out.println(user2.getId() + " ì¡°íšŒ ì„±ê³µ");
 		
 	}
 }
