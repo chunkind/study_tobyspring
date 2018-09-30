@@ -1,4 +1,4 @@
-package springbook.learningtest.jdk;
+package springbook.learningtest.jdk.step01;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 
 import org.junit.Test;
 
-//new : reflect 페키지 학습 테스트.
+//reflect 페키지 학습 테스트.
 public class ReflectionTest {
 
 	@Test

@@ -1,6 +1,5 @@
-package springbook.learningtest.jdk;
+package springbook.learningtest.jdk.step02;
 
-//new
 public interface Hello {
 	String sayHello(String name);
 	String sayHi(String name);

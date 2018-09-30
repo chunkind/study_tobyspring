@@ -1,6 +1,5 @@
-package springbook.learningtest.jdk;
+package springbook.learningtest.jdk.step02;
 
-//new
 public class HelloTarget implements Hello{
 
 	@Override
