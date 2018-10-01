@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- mysql -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="url"  value="jdbc:mysql://localhost/springbook" />
+		<property name="username"  value="spring" />
+		<property name="password"  value="book" />
+	</bean> -->
+	<!-- oracle -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name="username"  value="spring" />
+		<property name="password"  value="book" />
+	</bean>
+	
+	<bean id="mailSender" class="springbook.user.service.DummyMailSender" />
+	
+	<bean id="userDao" class="springbook.user.dao.UserDaoJdbc">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="userServiceImpl" class="springbook.user.service.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- old -->
+	<!-- <bean id="userService" class="springbook.user.service.TxProxyFactoryBean">
+		<property name="target" ref ="userServiceImpl" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="pattern" value="upgradeLevels" />
+		<property name="serviceInterface" value="springbook.user.service.UserService" />
+	</bean> -->
+	<!-- new -->
+	<bean id="userService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref ="userServiceImpl" />
+		<!-- 
+			어드바이스와 어드바이저를 동시에 설정해줄 수 있는 프로퍼티.
+			리스트에 어드바이스나 어드바이저의 빈 아이디를 값으로 넣어주면 된다.
+			기존의 ref 애트리뷰트를 사용하는  DI와는 방식이 다름에 주의해야 한다.
+		 -->
+		<property name="interceptorNames">
+			<list>
+				<value>transactionAdvisor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- new -->
+	<bean id="transactionAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="transactioinAdvice" />
+		<property name="pointcut" ref="transactionPointcut" />
+	</bean>
+	
+	<!-- new -->
+	<bean id="transactioinAdvice" class="springbook.user.service.TransactionAdvice">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<!-- new -->
+	<bean id="transactionPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedName" value="upgrade*" />
+	</bean>
+	
+</beans>
