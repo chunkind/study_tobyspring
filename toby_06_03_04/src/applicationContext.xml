@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- mysql -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="url"  value="jdbc:mysql://localhost/springbook" />
+		<property name="username"  value="spring" />
+		<property name="password"  value="book" />
+	</bean>
+	<!-- oracle -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name="username"  value="spring" />
+		<property name="password"  value="book" />
+	</bean> -->
+	
+	<bean id="userDao" class="springbook.user.dao.UserDaoJdbc">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- old : 다이나믹 프록시를 팩토리빈으로 생성. -->
+	<!-- <bean id="userService" class="springbook.user.service.UserServiceTx">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="userService" ref="userServiceImpl" />
+	</bean> -->
+	<!-- new : 다이나믹 프록시를 팩토리빈으로 생성. -->
+	<bean id="userService" class="springbook.user.service.TxProxyFactoryBean">
+		<property name="target" ref ="userServiceImpl" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="pattern" value="upgradeLevels" />
+		<property name="serviceInterface" value="springbook.user.service.UserService" />
+	</bean>
+	
+	<bean id="userServiceImpl" class="springbook.user.service.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="mailSender" class="springbook.user.service.DummyMailSender" />
+	
+</beans>
