@@ -13,7 +13,7 @@
 	<!-- oracle -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
 		<property name="username"  value="spring" />
 		<property name="password"  value="book" />
 	</bean>
@@ -24,15 +24,11 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id="userServiceImpl" class="springbook.user.service.UserServiceImpl">
+	<!-- old -->
+	<!-- <bean id="userServiceImpl" class="springbook.user.service.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
 		<property name="mailSender" ref="mailSender" />
 	</bean>
-	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
 	<bean id="userService" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target" ref ="userServiceImpl" />
 		<property name="interceptorNames">
@@ -40,6 +36,18 @@
 				<value>transactionAdvisor</value>
 			</list>
 		</property>
+	</bean> -->
+	<!-- new -->
+	<bean id="userService" class="springbook.user.service.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+	
+	<!-- new : parent="userService" -> 프로퍼티 정의를 포함해서 userService 빈의 설정을 상속받는다. -->
+	<bean id="testUserService" class="springbook.user.service.UserServiceTest$TestUserServiceImpl" parent="userService" />
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
 	<bean id="transactionAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
@@ -51,7 +59,15 @@
 		<property name="transactionManager" ref="transactionManager" />
 	</bean>
 	
-	<bean id="transactionPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+	<!-- old -->
+	<!-- <bean id="transactionPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedName" value="upgrade*" />
+	</bean> -->
+	<!-- new -->
+	<bean id="transactionPointcut" class="springbook.user.service.NameMatchClassMethodPointcut">
+		<!-- 클래스 이름 패턴 -->
+		<property name="mappedClassName" value="*ServiceImpl" />
+		<!-- 메소드 이름 패턴 -->
 		<property name="mappedName" value="upgrade*" />
 	</bean>
 	

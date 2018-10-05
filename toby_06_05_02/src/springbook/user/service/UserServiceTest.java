@@ -42,8 +42,17 @@ public class UserServiceTest {
 	@Autowired
 	UserService userService;
 	
+	/* new
+	 * 같은 타입의 빈이 두 개 존재하기 때문에 필드 이름을 기준으로 주입될 빈이 결정된다. 
+	 * 자동 프록시 생성기에 의해 트랜잭션 부가기능이 testUserService 빈에 적용
+	 * 됐는지를 확인하는 것이 목적이다.
+	 */
 	@Autowired
-	UserServiceImpl userServiceImpl;
+	UserService testUserService;
+	
+	//old
+//	@Autowired
+//	UserServiceImpl userServiceImpl;
 	
 	@Autowired
 	UserDao userDao;
@@ -59,11 +68,20 @@ public class UserServiceTest {
 	
 	List<User> users;
 	
-	static class TestUserService extends UserServiceImpl{
-		private String id;
-		private TestUserService(String id) {
-			this.id = id;
-		}
+	//old : 포인트컷의 클래스 필터에 선정되도록 이름 변경.
+//	static class TestUserService extends UserServiceImpl{
+	//new
+	static class TestUserServiceImpl extends UserServiceImpl{
+		
+		//old
+//		private String id;
+		//new : 테스트 픽스처의 user(3)의 id 값을 고정시켜버렸다.
+		private String id = "myGirl04";
+		
+		//old
+//		private TestUserService(String id) {
+//			this.id = id;
+//		}
 		protected void upgradeLevel(User user) {
 			if(user.getId().equals(this.id)) throw new TestUserServiceException();
 			super.upgradeLevel(user);
@@ -220,24 +238,28 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	@DirtiesContext
+//	@DirtiesContext //스프링 컨텍스트의 빈 설정을 변경하지 않으므로 @DirtiesContext 애노테이션은 제거됐다. 모든 테스트를 위한 DI 작업은 설정파일을 통해 서버에서 진행되므로 테스트 코드 자체는 단순해진다.
 	public void upgradeAllOrNothing() throws Exception{
 		
-		TestUserService testUserService = new TestUserService(users.get(3).getId());
-		testUserService.setUserDao(this.userDao);
-		testUserService.setMailSender(mailSender);
-		
-		ProxyFactoryBean txProxyFactoryBean = 
-			context.getBean("&userService", ProxyFactoryBean.class);
-		txProxyFactoryBean.setTarget(testUserService);
-		UserService txUserService = (UserService) txProxyFactoryBean.getObject();
+		//old
+//		TestUserService testUserService = new TestUserService(users.get(3).getId());
+//		testUserService.setUserDao(this.userDao);
+//		testUserService.setMailSender(mailSender);
+//		
+//		ProxyFactoryBean txProxyFactoryBean = 
+//			context.getBean("&userService", ProxyFactoryBean.class);
+//		txProxyFactoryBean.setTarget(testUserService);
+//		UserService txUserService = (UserService) txProxyFactoryBean.getObject();
 		
 		userDao.deleteAll();
-		
 		for(User user : users) userDao.add(user);
 		
 		try {
-			txUserService.upgradeLevels();
+			//old
+//			txUserService.upgradeLevels();
+			//new
+			this.testUserService.upgradeLevels();
+			
 			fail("TestUserServiceException expected");
 		}
 		catch(TestUserServiceException e) {
@@ -245,6 +267,13 @@ public class UserServiceTest {
 		}
 		checkUserAndLevel(users.get(1), "myGirl02", Level.BASIC);
 	}
+	
+	//new : 프록시로 변경된 오브젝트인지 확인한다.
+	@Test
+	public void advisorAutoProxyCreator() {
+		assertThat(testUserService, is(java.lang.reflect.Proxy.class));
+	}
+	
 	
 }
 
