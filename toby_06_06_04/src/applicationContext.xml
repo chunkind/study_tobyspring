@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- old -->
+<!-- <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"> -->
+<!-- new -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	
+	<!-- mysql -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="url"  value="jdbc:mysql://localhost/springbook" />
+		<property name="username"  value="spring" />
+		<property name="password"  value="book" />
+	</bean>
+	<!-- oracle -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
+		<property name="username"  value="spring" />
+		<property name="password"  value="book" />
+	</bean> -->
+	
+	<bean id="mailSender" class="springbook.user.service.DummyMailSender" />
+	
+	<bean id="userDao" class="springbook.user.dao.UserDaoJdbc">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="userService" class="springbook.user.service.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+	
+	<bean id="testUserService" class="springbook.user.service.UserServiceTest$TestUserService" parent="userService" />
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- old -->
+	<!-- <tx:advice id="transactioinAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" timeout="30" />
+			<tx:method name="upgrade*" propagation="REQUIRES_NEW" isolation="SERIALIZABLE" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice> -->
+	<!-- new : 일단은 이전 버전을 적용. -->
+	<!-- <bean id="transactioinAdvice" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED, readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean> -->
+	<!-- new2 : tx 적용 -->
+	<tx:advice id="transactioinAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<!-- old -->
+		<!-- <aop:advisor advice-ref="transactioinAdvice" pointcut="execution(* *..*ServiceImpl.upgrade*(..))"/> -->
+		<!-- new -->
+		<aop:advisor advice-ref="transactioinAdvice" pointcut="bean(*Service)"/>
+	</aop:config>
+	
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
