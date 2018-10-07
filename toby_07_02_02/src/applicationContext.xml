@@ -11,19 +11,19 @@
 		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 	
 	<!-- mysql -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="url"  value="jdbc:mysql://localhost/springbook" />
 		<property name="username"  value="spring" />
 		<property name="password"  value="book" />
-	</bean>
+	</bean> -->
 	<!-- oracle -->
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
 		<property name="username"  value="spring" />
 		<property name="password"  value="book" />
-	</bean> -->
+	</bean>
 	
 	<bean id="mailSender" class="springbook.user.service.DummyMailSender" />
 	
@@ -32,7 +32,8 @@
 		<property name="sqlService" ref="sqlService" />
 	</bean>
 	
-	<bean id="sqlService" class="springbook.user.sqlservice.SimpleSqlService">
+	<!-- old -->
+	<!-- <bean id="sqlService" class="springbook.user.sqlservice.SimpleSqlService">
 		<property name="sqlMap">
 			<map>
 				<entry key="userAdd" value="INSERT INTO USERS (id, name, password, lv, login, recommend) VALUES(?, ?, ?, ?, ?, ?)" />
@@ -43,7 +44,10 @@
 				<entry key="userUpdate" value="UPDATE USERS SET name = ?, password = ?, lv = ?, login = ?, recommend = ? WHERE id = ?" />
 			</map>
 		</property>
-	</bean>
+	</bean> -->
+	<!-- new -->
+	<bean id="sqlService" class="springbook.user.sqlservice.XmlSqlService"></bean>
+	
 	
 	<bean id="userService" class="springbook.user.service.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
