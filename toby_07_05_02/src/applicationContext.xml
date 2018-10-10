@@ -46,6 +46,8 @@
 	<!-- new -->
 	<bean id="sqlRegistry" class="springbook.user.sqlservice.updatable.ConcurrentHashMapSqlRegistry"></bean>
 	
+	<!-- new -->
+	
 	<bean id="unmarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="contextPath" value="springbook.user.sqlservice.jaxb" />
 	</bean>
