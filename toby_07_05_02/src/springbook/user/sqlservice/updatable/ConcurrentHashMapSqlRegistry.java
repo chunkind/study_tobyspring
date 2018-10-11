@@ -28,9 +28,10 @@ public class ConcurrentHashMapSqlRegistry implements UpdatableSqlRegistry{
 
 	@Override
 	public void updateSql(String key, String sql) throws SqlUpdateFailureException {
-		if(sqlMap.get(key) == null) {
-			throw new SqlUpdateFailureException(key + " 에 해당하는 SQL을 찾을 수 없습니다.");
+		if (sqlMap.get(key) == null) {
+			throw new SqlUpdateFailureException(key + "에 해당하는 SQL을 찾을 수 없습니다");
 		}
+		
 		sqlMap.put(key, sql);
 	}
 
