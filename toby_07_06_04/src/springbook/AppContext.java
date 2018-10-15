@@ -14,6 +14,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.mysql.jdbc.Driver;
+
 import oracle.jdbc.driver.OracleDriver;
 import springbook.user.dao.UserDao;
 import springbook.user.service.DummyMailSender;
@@ -23,24 +25,24 @@ import springbook.user.service.UserServiceTest.TestUserService;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages="springbook.user")
-@Import(SqlServiceContext.class)
+@Import({SqlServiceContext.class, TestAppContext.class, ProductionAppContext.class})
 public class AppContext {
 	
 	@Bean
 	public DataSource dataSource() {
 		//mysql
-//		SimpleDriverDataSource ds = new SimpleDriverDataSource();
-//		ds.setDriverClass(Driver.class);
-//		ds.setUrl("jdbc:mysql://localhost/springbook?characterEncoding=UTF-8");
-//		ds.setUsername("spring");
-//		ds.setPassword("book");
-
-		//oracle
 		SimpleDriverDataSource ds = new SimpleDriverDataSource();
-		ds.setDriverClass(OracleDriver.class);
-		ds.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:orcl");
+		ds.setDriverClass(Driver.class);
+		ds.setUrl("jdbc:mysql://localhost/springbook?characterEncoding=UTF-8");
 		ds.setUsername("spring");
 		ds.setPassword("book");
+
+		//oracle
+//		SimpleDriverDataSource ds = new SimpleDriverDataSource();
+//		ds.setDriverClass(OracleDriver.class);
+//		ds.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:orcl");
+//		ds.setUsername("spring");
+//		ds.setPassword("book");
 		
 		return ds;
 	}
@@ -50,12 +52,6 @@ public class AppContext {
 		DataSourceTransactionManager tm = new DataSourceTransactionManager();
 		tm.setDataSource(dataSource());
 		return tm;
-	}
-	
-	//new
-	@Bean
-	public MailSender mailSender() {
-		JavaMailSenderImpl mailSender = new Java
 	}
 	
 }
