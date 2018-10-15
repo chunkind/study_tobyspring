@@ -17,6 +17,7 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 	
 	<!-- new: 설정파일을 java로 변경하면서 제거 -->
+	
 	<!-- mysql -->
 	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
@@ -32,14 +33,14 @@
 		<property name="password"  value="book" />
 	</bean> -->
 	
-	<bean id="mailSender" class="springbook.user.service.DummyMailSender" />
+	<!-- <bean id="mailSender" class="springbook.user.service.DummyMailSender" /> -->
 	
-	<bean id="userDao" class="springbook.user.dao.UserDaoJdbc">
+	<!-- <bean id="userDao" class="springbook.user.dao.UserDaoJdbc">
 		<property name="dataSource" ref="dataSource" />
 		<property name="sqlService" ref="sqlService" />
-	</bean>
+	</bean> -->
 	
-	<bean id="sqlService" class="springbook.user.sqlservice.OxmSqlService">
+	<!-- <bean id="sqlService" class="springbook.user.sqlservice.OxmSqlService">
 		<property name="unmarshaller" ref="unmarshaller" />
 		<property name="sqlRegistry" ref="sqlRegistry" />
 	</bean>
@@ -50,29 +51,26 @@
 	
 	<bean id="unmarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="contextPath" value="springbook.user.sqlservice.jaxb" />
-	</bean>
+	</bean> -->
 	
-	<bean id="userService" class="springbook.user.service.UserServiceImpl">
+	<!-- <bean id="userService" class="springbook.user.service.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
 		<property name="mailSender" ref="mailSender" />
-	</bean>
+	</bean> -->
 	
-	<bean id="testUserService" class="springbook.user.service.UserServiceTest$TestUserService" parent="userService" />
+	<!-- <bean id="testUserService" class="springbook.user.service.UserServiceTest$TestUserService" parent="userService" /> -->
 	
-	<!-- new: 설정파일을 java로 변경하면서 제거 -->
 	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean> -->
 	
 	<tx:annotation-driven />
 	
-	<!-- new: 설정파일을 java로 변경하면서 제거 -->
 	<!-- <context:annotation-config /> -->
 	
-	<!-- new -->
-	<jdbc:embedded-database id="embeddedDatabase" type="HSQL">
+	<!-- <jdbc:embedded-database id="embeddedDatabase" type="HSQL">
 		<jdbc:script location="classpath:springbook/user/sqlservice/updatable/sqlRegistrySchema.sql"/>
-	</jdbc:embedded-database>
+	</jdbc:embedded-database> -->
 	
 </beans>
 

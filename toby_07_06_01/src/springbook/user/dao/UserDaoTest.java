@@ -18,6 +18,7 @@ import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
 import org.springframework.jdbc.support.SQLExceptionTranslator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import springbook.TestApplicationContext;
 import springbook.user.domain.Level;
@@ -28,6 +29,8 @@ import springbook.user.domain.User;
 //@ContextConfiguration(locations="/test-applicationContext.xml")
 //new
 @ContextConfiguration(classes=TestApplicationContext.class)
+//new
+@EnableTransactionManagement
 public class UserDaoTest {
 	
 	@Autowired
