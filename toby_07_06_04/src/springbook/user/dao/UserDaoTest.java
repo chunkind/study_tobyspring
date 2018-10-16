@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
@@ -26,6 +27,7 @@ import springbook.user.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
+//@ActiveProfiles("production")
 @ContextConfiguration(classes=AppContext.class)
 public class UserDaoTest {
 	
@@ -156,6 +158,17 @@ public class UserDaoTest {
 		User user2update = dao.get(user2.getId());
 		checkSameUser(user2, user2update);
 		
+	}
+	
+	//new
+	@Autowired DefaultListableBeanFactory bf;
+	
+	//new
+	@Test
+	public void beans() {
+		for(String n : bf.getBeanDefinitionNames()) {
+			System.out.println(n + " \t " + bf.getBean(n).getClass().getName());
+		}
 	}
 	
 }
