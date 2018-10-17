@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.mail.MailSender;
@@ -29,9 +31,15 @@ import springbook.user.service.UserServiceTest.TestUserService;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages="springbook.user")
-@Import(SqlServiceContext.class)
+//old
+//@Import(SqlServiceContext.class)
+//new
+@EnableSqlService
 @PropertySource("/database.properties")
-public class AppContext {
+//old
+//public class AppContext {
+//new
+public class AppContext implements SqlMapConfig{
 	
 	@Value("${db.driverClass}") Class<? extends Driver> driverClass;
 	@Value("${db.url}") String url;
@@ -83,6 +91,19 @@ public class AppContext {
 		DataSourceTransactionManager tm = new DataSourceTransactionManager();
 		tm.setDataSource(dataSource());
 		return tm;
+	}
+	
+	//new
+//	@Bean
+//	public SqlMapConfig sqlMapConfig(){
+//		return new UserSqlMapConfig();
+//	}
+
+	
+	//new2 : 이걸하면 UserSqlMapConfig.java는 필요 없어진다.
+	@Override
+	public Resource getSqlMapResouce() {
+		return new ClassPathResource("sqlmap.xml", UserDao.class);
 	}
 	
 }
