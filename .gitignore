@@ -1,3 +1,5 @@
 RemoteSystemsTempFiles/
 .metadata/
 .recommenders/
+/build/*
+*/build/*
