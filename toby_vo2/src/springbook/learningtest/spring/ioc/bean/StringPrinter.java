@@ -1,5 +1,7 @@
 package springbook.learningtest.spring.ioc.bean;
 
+
+
 public class StringPrinter implements Printer {
 	private StringBuffer buffer = new StringBuffer();
 
@@ -11,3 +13,4 @@ public class StringPrinter implements Printer {
 		return this.buffer.toString();
 	}
 }
+

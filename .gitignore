@@ -3,3 +3,6 @@ RemoteSystemsTempFiles/
 .recommenders/
 /build/*
 */build/*
+Servers/
+*/.settings/*
+*/bin/*
