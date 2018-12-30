@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import springbook.learningtest.spring.web.AbstractDispatcherServletTest;
 
 public class SessionAttributesTest extends AbstractDispatcherServletTest {
+	
 	@Test
 	public void sessionAttr() throws ServletException, IOException {
 		setClasses(UserController.class);
@@ -37,6 +39,14 @@ public class SessionAttributesTest extends AbstractDispatcherServletTest {
 		assertThat(session.getAttribute("user"), is(nullValue()));
 	}
 	
+//	@Test
+//	public void paramMapTest() throws ServletException, IOException {
+//		setClasses(UserController.class);
+//		initRequest("/user/edit", "POST").addParameter("id", "1").addParameter("pw", "2");
+//		runService();
+//		
+//	}
+	
 	@Controller	
 	@SessionAttributes("user")
 	static class UserController {
@@ -44,6 +54,11 @@ public class SessionAttributesTest extends AbstractDispatcherServletTest {
 		public User form(@RequestParam int id) {
 			return new User(1, "Spring", "mail@spring.com");
 		}
+		
+//		@RequestMapping(value="/user/edit", method=RequestMethod.POST) 
+//		public void submit(@RequestParam Map<String, Object> userMap, SessionStatus sessionStatus) {
+//			sessionStatus.setComplete();
+//		}
 		
 		@RequestMapping(value="/user/edit", method=RequestMethod.POST) 
 		public void submit(@ModelAttribute User user, SessionStatus sessionStatus) {
