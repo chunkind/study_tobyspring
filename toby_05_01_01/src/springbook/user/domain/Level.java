@@ -2,9 +2,19 @@ package springbook.user.domain;
 
 //new : 학습테스트1.
 //public enum Level {
-//	BASIC(), SILVER(), GOLD();
+//	BASIC(1,"기본"), SILVER(2,"실버"), GOLD(3,"골드");
+//	private final int value;
+//	private final String code;
+//	
+//	Level(int value, String code) {
+//		this.value = value;
+//		this.code = code;
+//	}
+//	
 //	// enum 학습 테스트.
 //	public static void main(String[] args) {
+//		System.out.println(Level.BASIC.code);
+//		System.out.println(Level.BASIC.value);
 //		Level e1 = Level.BASIC;
 //		Level e2 = Level.SILVER;
 //		Level e3 = Level.GOLD;
@@ -37,6 +47,7 @@ public enum Level{
 	}
 	
 	public static void main(String[] args) {
+		System.out.println(Level.BASIC.value);
 		System.out.println(Level.valueOf(1));
 		System.out.println(Level.valueOf(2));
 		System.out.println(Level.valueOf(3));
