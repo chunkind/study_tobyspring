@@ -21,6 +21,12 @@ import springbook.user.dao.UserDao;
 import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
+/**
+ * @Auth : K. J. S.
+ * @Date : 2019. 01. 21.
+ * 당연히 에러가 나는 코드.
+ * 트랜잭션이 적용이 안되어있다.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="/applicationContext.xml")
 public class UserServiceTest {
