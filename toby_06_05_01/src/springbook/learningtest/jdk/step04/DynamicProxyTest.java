@@ -24,12 +24,11 @@ public class DynamicProxyTest {
 		assertThat(proxiedHello.sayHello("Chun"), is("HELLO CHUN"));
 		assertThat(proxiedHello.sayHi("Chun"), is("HI CHUN"));
 		assertThat(proxiedHello.sayThankYou("Chun"), is("THANK YOU CHUN"));
-		
 	}
 	
 	//new 
 	@Test
-	public void proxyFactoryBean(){
+	public void proxyFactoryBean() {
 		ProxyFactoryBean pfBean = new ProxyFactoryBean();
 		pfBean.setTarget(new HelloTarget()); //타깃 설정
 		pfBean.addAdvice(new UppercaseAdvice()); //부가기능을 담은 어드바이스를 추가 한다. 여러 개를 추가할 수도 있다.
@@ -39,6 +38,5 @@ public class DynamicProxyTest {
 		assertThat(proxiedHello.sayHello("Chun"), is("HELLO CHUN"));
 		assertThat(proxiedHello.sayHi("Chun"), is("HI CHUN"));
 		assertThat(proxiedHello.sayThankYou("Chun"), is("THANK YOU CHUN"));
-	}
-	
+	}	
 }

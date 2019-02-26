@@ -1,7 +1,6 @@
 package springbook.learningtest.jdk.step04;
 
-public class HelloTarget implements Hello{
-
+public class HelloTarget implements Hello {
 	@Override
 	public String sayHello(String name) {
 		return "Hello " + name;
@@ -16,5 +15,4 @@ public class HelloTarget implements Hello{
 	public String sayThankYou(String name) {
 		return "Thank You " + name;
 	}
-
 }

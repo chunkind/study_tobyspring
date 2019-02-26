@@ -5,7 +5,6 @@ import org.aopalliance.intercept.MethodInvocation;
 
 //new
 public class UppercaseAdvice implements MethodInterceptor{
-
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		/*
@@ -16,5 +15,4 @@ public class UppercaseAdvice implements MethodInterceptor{
 		String ret = (String)invocation.proceed();
 		return ret.toUpperCase(); //부가기능 적용
 	}
-
 }
